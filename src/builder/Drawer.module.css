@@ -1,0 +1,51 @@
+.dialog {
+	width: 100%;
+	margin: auto 0 0;
+	max-width: inherit;
+	max-height: inherit;
+	border-style: none;
+
+	min-height: 90vh;
+	border-radius: var(--radius-3);
+
+	animation: dialog-down 0.5s var(--ease-3);
+}
+
+.dialog[open] {
+	animation: dialog-up 0.5s var(--ease-3);
+}
+
+.dialog[open]::backdrop {
+	animation: backdrop-up 0.5s var(--ease-in-3) forwards;
+}
+
+@keyframes dialog-up {
+	from {
+		transform: translateY(100%);
+		display: none;
+	}
+	to {
+		transform: translateY(0);
+		display: block;
+	}
+}
+
+@keyframes dialog-down {
+	from {
+		transform: translateY(0);
+		display: block;
+	}
+	to {
+		transform: translateY(100%);
+		display: none;
+	}
+}
+
+@keyframes backdrop-up {
+	from {
+		background-color: rgba(0, 0, 0, 0);
+	}
+	to {
+		background-color: rgba(0, 0, 0, 0.5);
+	}
+}
