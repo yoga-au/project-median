@@ -75,6 +75,14 @@ textarea:not([rows]) {
   scroll-margin-block: 5ex;
 }
 
+/* Reset button default style */
+button {
+  background: none;
+  border: none;
+  padding-block: 0;
+  padding-inline: 0;
+}
+
 @supports (text-wrap: pretty) {
   p,
   li {
