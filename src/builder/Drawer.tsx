@@ -1,36 +1,29 @@
-import { forwardRef, type ReactNode } from "react";
-import style from "./Drawer.module.css";
-
-type Ref = HTMLDialogElement;
+import type { ReactNode } from "react";
+import { Drawer as DrawerComponent } from "vaul";
+import styles from "./Drawer.module.css";
 
 export type DrawerProps = {
+	triggerElement?: ReactNode;
 	children?: ReactNode;
-	onClose?: () => void;
+	title?: ReactNode;
 };
 
-const Drawer = forwardRef<Ref, DrawerProps>(({ onClose, children }, ref) => {
+const Drawer = ({ triggerElement, children, title }: DrawerProps) => {
 	return (
-		<dialog
-			ref={ref}
-			className={style.dialog}
-			onClick={(ev) => {
-				// Close the dialog if the user clicks outside of it
-				const rect = ev.currentTarget.getBoundingClientRect();
-				if (
-					ev.clientX < rect.left ||
-					ev.clientX > rect.right ||
-					ev.clientY < rect.top ||
-					ev.clientY > rect.bottom
-				) {
-					onClose?.();
-				}
-			}}
-		>
-			{children}
-		</dialog>
+		<DrawerComponent.Root>
+			<DrawerComponent.Trigger className={styles.trigger}>
+				{triggerElement}
+			</DrawerComponent.Trigger>
+			<DrawerComponent.Portal>
+				<DrawerComponent.Overlay className={styles.overlay} />
+				<DrawerComponent.Content className={styles.content}>
+					<div className={styles.handle} />
+					<DrawerComponent.Title>{title}</DrawerComponent.Title>
+					{children}
+				</DrawerComponent.Content>
+			</DrawerComponent.Portal>
+		</DrawerComponent.Root>
 	);
-});
-
-Drawer.displayName = "Drawer";
+};
 
 export default Drawer;
