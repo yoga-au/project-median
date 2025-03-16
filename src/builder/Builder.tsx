@@ -1,12 +1,9 @@
-import Drawer from "./Drawer";
+import BuilderDrawer from "./BuilderDrawer";
 
 const Builder = () => {
 	return (
 		<div>
-			<Drawer
-				title={"Pick Block"}
-				triggerElement={<span>Add Block</span>}
-			></Drawer>
+			<BuilderDrawer />
 		</div>
 	);
 };
